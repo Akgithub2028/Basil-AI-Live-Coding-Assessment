@@ -43,6 +43,8 @@ def main():
     ap.add_argument("--bs", type=int, default=64)
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
+    if args.epochs < 1 or args.bs < 1:
+        ap.error("--epochs and --bs must be positive")
     set_seed(args.seed)
 
     X, y, groups, ch_names = build_dataset(args.subjects)
@@ -79,14 +81,18 @@ def main():
             xb, yb = torch.from_numpy(X[b]), torch.from_numpy(y[b])
             opt.zero_grad(); loss = loss_fn(model(xb), yb); loss.backward(); opt.step()
         va_acc = evaluate(model, X[va], y[va])
-        te_acc = evaluate(model, X[te], y[te])
-        if te_acc > best_acc:   # keep the best checkpoint
-            best_acc, best_ep = te_acc, ep
+        if va_acc > best_acc:   # select on validation only; first wins ties
+            best_acc, best_ep = va_acc, ep
             best_state = {k: v.clone() for k, v in model.state_dict().items()}
-        print(f"epoch {ep:3d}  loss {loss.item():.3f}  val {va_acc:.3f}  test {te_acc:.3f}")
+        print(f"epoch {ep:3d}  loss {loss.item():.3f}  val {va_acc:.3f}")
 
     model.load_state_dict(best_state)
+    # Open the test set once, after checkpoint selection has finished.
     result = dict(channels=args.channels, seed=args.seed, best_epoch=best_ep,
+                  val_acc=best_acc, selection="validation_accuracy",
+                  train_subjects=np.unique(groups[tr]).tolist(),
+                  val_subjects=np.unique(groups[va]).tolist(),
+                  test_subjects=np.unique(groups[te]).tolist(),
                   test_acc=evaluate(model, X[te], y[te]), n_test=len(te))
     print(json.dumps(result))
     with open("results.jsonl", "a") as f:

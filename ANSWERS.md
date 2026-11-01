@@ -68,8 +68,6 @@ subjects are always 9–10 for the full dataset; a seeded two-subject validation
 set is drawn from 1–8, leaving six training subjects. No labels select splits.
 This is not an eight-subject training result: validation is held out separately.
 
-### Sources and interpretation
-
 ### Fix 5 — preprocessing sees validation and test (`train.py`)
 
 Wrong: channel means and standard deviations were fitted to all trials before
@@ -79,6 +77,19 @@ Effect: evaluation is contaminated and may be optimistic through adaptation to
 the held-out distribution, although unsupervised normalization leakage can
 move a particular accuracy either way. Fix: split first, fit statistics using
 training trials only, then apply those frozen statistics to every partition.
+
+### Fix 6 — checkpoint chosen on test performance (`train.py`)
+
+Wrong: the loop evaluated test accuracy every epoch and kept the checkpoint
+with the largest test score; the printed validation accuracy was not used.
+
+Effect: taking the maximum of noisy test scores is optimistically biased and
+turns the test set into a selection set. Fix: choose the first checkpoint with
+the highest validation accuracy, then evaluate the restored model on the test
+set exactly once. Record the split IDs and validation selection criterion.
+Removing this bias does not guarantee a lower score in every individual run.
+
+### Sources and interpretation
 
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding
