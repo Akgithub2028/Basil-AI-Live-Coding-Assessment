@@ -1,0 +1,78 @@
+{
+  "archive": "study_20261101T091133698074Z.zip",
+  "archive_sha256": "fe969f7543d95876d1df89e4a318ff1027ed7267d8c162f5e17e92066b06df42",
+  "zip_integrity": "passed",
+  "run_status": "complete",
+  "sources": {
+    "main.py": {
+      "sha256": "46153bb6212af73ee2f0cb871f7f4b85db43f974b1330c135396f87db7e9daed",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "experiment.py": {
+      "sha256": "83208f990cc1c0443e25241db31a26a72c525d998c2b5bc84bcf08d3c7505a72",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "experiment_models.py": {
+      "sha256": "9952f42e7cc8ed29f198bc65eddc74cfea14b46fa8e75706ae42282267c1f08c",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "experiment_report.py": {
+      "sha256": "5daa7044bd942d662da295da59d4753c5542d4290ad0403ddbecbee0c100ae12",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "EXPERIMENT_PLAN.md": {
+      "sha256": "e5be20d4d3c5080a5b62af970ae44ddd58f2c9a863d5ef1a88d00ade4adf4e80",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "models.py": {
+      "sha256": "aed373929f3e8555e5644d527736bcb553f716b7cba8684c0cc5845d3e657f8b",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "data.py": {
+      "sha256": "73a46f52351c570ecaed9a2a2d30d2df95f94c8e71aa5a0db06e4cd94fe24b27",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "colab_audit.py": {
+      "sha256": "69736e7dd79e2c7295163667b35486dd88735cbf6ea416225430753329a878a9",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "audit_baselines.py": {
+      "sha256": "c589f226def46458e168c8d266e5ab8b29f86331a44639f4e601cde530c2fe17",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "prepare_data.py": {
+      "sha256": "42df02ea9fdb9e05bf22bac4d5fcfe90dd6eca35618229f7624423d4808f4218",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "train.py": {
+      "sha256": "db520db52af299966a427d4a9d22a452d78b3fe01a80e02a0eeb36b56d652c68",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "requirements-colab.txt": {
+      "sha256": "b21cd5bef5f98e707b7ce98f173564821fa69c4eb6ecab6d2105ccef1a314446",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "Part2_Controlled_Experiment.ipynb": {
+      "sha256": "c3cfe95206af239b6df57219e3a67fe7f1087c8c94db827dcd7ea29b856125ed",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "CONTROLLED_EXPERIMENT.md": {
+      "sha256": "1ad2a9d2f564c0bb634d5a96e8f8aa3a3ed1c3be72db19dab4041c84d5efabea",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    }
+  }
+}

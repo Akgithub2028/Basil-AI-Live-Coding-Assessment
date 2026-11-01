@@ -1,0 +1,68 @@
+{
+  "status": "complete",
+  "arguments": {
+    "device": "cuda",
+    "stages": [
+      "dev",
+      "final"
+    ],
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "epochs": 40,
+    "sync_dir": "/content/drive/MyDrive/Basil AI Intern OA/part2_transformer/artifacts/controlled_experiment",
+    "verify_repeat": true,
+    "smoke": false
+  },
+  "gpu": "Tesla T4",
+  "python": "3.13.16",
+  "cuda": "13.0",
+  "cudnn": 92700,
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "numpy": "2.1.3",
+    "mne": "1.13.2",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  },
+  "architectures": {
+    "eegnet_part1_config": {
+      "parameters": 2738,
+      "architecture": "EEGNet(\n  (block1): Sequential(\n    (0): Conv2d(1, 8, kernel_size=(1, 80), stride=(1, 1), padding=(0, 40), bias=False)\n    (1): BatchNorm2d(8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  )\n  (block2): Sequential(\n    (0): Conv2d(8, 16, kernel_size=(64, 1), stride=(1, 1), groups=8, bias=False)\n    (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    (2): ELU(alpha=1.0)\n    (3): AvgPool2d(kernel_size=(1, 4), stride=(1, 4), padding=0)\n    (4): Dropout(p=0.5, inplace=False)\n  )\n  (block3): Sequential(\n    (0): Conv2d(16, 16, kernel_size=(1, 16), stride=(1, 1), padding=(0, 8), groups=16, bias=False)\n    (1): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)\n    (2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    (3): ELU(alpha=1.0)\n    (4): AvgPool2d(kernel_size=(1, 8), stride=(1, 8), padding=0)\n    (5): Dropout(p=0.5, inplace=False)\n  )\n  (head): Linear(in_features=240, out_features=2, bias=True)\n)",
+      "tokens": null
+    },
+    "vanilla_transformer": {
+      "parameters": 135746,
+      "architecture": "VanillaEEGTransformer(\n  (proj): Linear(in_features=64, out_features=64, bias=True)\n  (encoder): TransformerEncoder(\n    (layers): ModuleList(\n      (0-2): 3 x TransformerEncoderLayer(\n        (self_attn): MultiheadAttention(\n          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)\n        )\n        (linear1): Linear(in_features=64, out_features=128, bias=True)\n        (dropout): Dropout(p=0.3, inplace=False)\n        (linear2): Linear(in_features=128, out_features=64, bias=True)\n        (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (dropout1): Dropout(p=0.3, inplace=False)\n        (dropout2): Dropout(p=0.3, inplace=False)\n      )\n    )\n  )\n  (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n  (head): Linear(in_features=64, out_features=2, bias=True)\n)",
+      "tokens": 482
+    },
+    "local_temporal": {
+      "parameters": 135746,
+      "architecture": "YourModel(\n  (temporal): Conv1d(1, 8, kernel_size=(32,), stride=(16,), bias=False)\n  (proj): Linear(in_features=512, out_features=64, bias=True)\n  (encoder): TransformerEncoder(\n    (layers): ModuleList(\n      (0-2): 3 x TransformerEncoderLayer(\n        (self_attn): MultiheadAttention(\n          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)\n        )\n        (linear1): Linear(in_features=64, out_features=128, bias=True)\n        (dropout): Dropout(p=0.3, inplace=False)\n        (linear2): Linear(in_features=128, out_features=64, bias=True)\n        (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (dropout1): Dropout(p=0.3, inplace=False)\n        (dropout2): Dropout(p=0.3, inplace=False)\n      )\n    )\n  )\n  (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n  (head): Linear(in_features=64, out_features=2, bias=True)\n)",
+      "tokens": 30
+    },
+    "scattered_control": {
+      "parameters": 135746,
+      "architecture": "ScatteredTimeControl(\n  (temporal): Conv1d(1, 8, kernel_size=(32,), stride=(16,), bias=False)\n  (proj): Linear(in_features=512, out_features=64, bias=True)\n  (encoder): TransformerEncoder(\n    (layers): ModuleList(\n      (0-2): 3 x TransformerEncoderLayer(\n        (self_attn): MultiheadAttention(\n          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)\n        )\n        (linear1): Linear(in_features=64, out_features=128, bias=True)\n        (dropout): Dropout(p=0.3, inplace=False)\n        (linear2): Linear(in_features=128, out_features=64, bias=True)\n        (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (dropout1): Dropout(p=0.3, inplace=False)\n        (dropout2): Dropout(p=0.3, inplace=False)\n      )\n    )\n  )\n  (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n  (head): Linear(in_features=64, out_features=2, bias=True)\n)",
+      "tokens": 30
+    }
+  },
+  "primary": "held-out balanced accuracy mean and SD across seeds",
+  "historical_test_exposure": true,
+  "strict_determinism": true,
+  "source_sha256": {
+    "main.py": "46153bb6212af73ee2f0cb871f7f4b85db43f974b1330c135396f87db7e9daed",
+    "experiment.py": "83208f990cc1c0443e25241db31a26a72c525d998c2b5bc84bcf08d3c7505a72",
+    "experiment_models.py": "9952f42e7cc8ed29f198bc65eddc74cfea14b46fa8e75706ae42282267c1f08c",
+    "experiment_report.py": "5daa7044bd942d662da295da59d4753c5542d4290ad0403ddbecbee0c100ae12",
+    "EXPERIMENT_PLAN.md": "e5be20d4d3c5080a5b62af970ae44ddd58f2c9a863d5ef1a88d00ade4adf4e80",
+    "models.py": "aed373929f3e8555e5644d527736bcb553f716b7cba8684c0cc5845d3e657f8b",
+    "data.py": "73a46f52351c570ecaed9a2a2d30d2df95f94c8e71aa5a0db06e4cd94fe24b27",
+    "colab_audit.py": "69736e7dd79e2c7295163667b35486dd88735cbf6ea416225430753329a878a9"
+  }
+}

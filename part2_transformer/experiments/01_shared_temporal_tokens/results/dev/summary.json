@@ -1,0 +1,100 @@
+{
+  "models": {
+    "eegnet_part1_config": {
+      "mean_ba": 0.6066666666666667,
+      "sd_ba": 0.05144816401240098,
+      "mean_accuracy": 0.6066666666666667,
+      "best_accuracy": 0.7,
+      "worst_accuracy": 0.5444444444444444,
+      "mean_train_accuracy": 0.7918518518518518,
+      "mean_training_seconds": 5.512620483999763,
+      "collapsed_seeds": []
+    },
+    "vanilla_transformer": {
+      "mean_ba": 0.5177777777777778,
+      "sd_ba": 0.03950308629918038,
+      "mean_accuracy": 0.5177777777777778,
+      "best_accuracy": 0.5777777777777777,
+      "worst_accuracy": 0.45555555555555555,
+      "mean_train_accuracy": 0.9244444444444444,
+      "mean_training_seconds": 21.077529272200195,
+      "collapsed_seeds": [
+        2
+      ]
+    },
+    "local_temporal": {
+      "mean_ba": 0.5822222222222222,
+      "sd_ba": 0.018053418676968788,
+      "mean_accuracy": 0.5822222222222222,
+      "best_accuracy": 0.6,
+      "worst_accuracy": 0.5555555555555556,
+      "mean_train_accuracy": 0.9874074074074075,
+      "mean_training_seconds": 13.6848021476,
+      "collapsed_seeds": []
+    },
+    "scattered_control": {
+      "mean_ba": 0.5644444444444445,
+      "sd_ba": 0.042975732457363816,
+      "mean_accuracy": 0.5644444444444445,
+      "best_accuracy": 0.6333333333333333,
+      "worst_accuracy": 0.5111111111111111,
+      "mean_train_accuracy": 0.9970370370370372,
+      "mean_training_seconds": 13.712291673200298,
+      "collapsed_seeds": []
+    }
+  },
+  "criteria": {
+    "local_mean_ba_above_vanilla": true,
+    "local_mean_ba_above_scattered": true,
+    "local_seed_sd_not_above_vanilla": true,
+    "local_mean_ba_above_chance": true,
+    "no_local_class_collapse": true
+  },
+  "full_descriptive_support": true,
+  "paired_differences": {
+    "vanilla_transformer": [
+      {
+        "seed": 0,
+        "delta_balanced_accuracy": 0.04444444444444451
+      },
+      {
+        "seed": 1,
+        "delta_balanced_accuracy": 0.011111111111111183
+      },
+      {
+        "seed": 2,
+        "delta_balanced_accuracy": 0.033333333333333326
+      },
+      {
+        "seed": 3,
+        "delta_balanced_accuracy": 0.0888888888888889
+      },
+      {
+        "seed": 4,
+        "delta_balanced_accuracy": 0.14444444444444443
+      }
+    ],
+    "scattered_control": [
+      {
+        "seed": 0,
+        "delta_balanced_accuracy": -0.033333333333333326
+      },
+      {
+        "seed": 1,
+        "delta_balanced_accuracy": -0.0444444444444444
+      },
+      {
+        "seed": 2,
+        "delta_balanced_accuracy": 0.011111111111111072
+      },
+      {
+        "seed": 3,
+        "delta_balanced_accuracy": 0.06666666666666665
+      },
+      {
+        "seed": 4,
+        "delta_balanced_accuracy": 0.0888888888888889
+      }
+    ]
+  }
+}
