@@ -1,0 +1,7 @@
+.venv/
+.cache/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+artifacts/part1/original_source/
+artifacts/part1/attempts/
