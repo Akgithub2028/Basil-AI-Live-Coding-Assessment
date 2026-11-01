@@ -25,6 +25,16 @@ the intentionally empty frontal group (Task 3) as a silent planted defect.
 
 ### Sources and interpretation
 
+### Fix 1 — actual movement loaded as imagery (`data.py`)
+
+Wrong: runs 5/9/13 contain executed bilateral movements, while the task asks
+for imagined movements (6/10/14).
+
+Effect: the original number describes a different task and can be inflated by
+actual movement, muscle activity and stronger movement-related signals; the
+direction of the measured accuracy change is not guaranteed. Fix: select
+6/10/14 without changing the T1/T2 hands/feet label mapping.
+
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding
   the first second to avoid classifying cue-evoked responses.
