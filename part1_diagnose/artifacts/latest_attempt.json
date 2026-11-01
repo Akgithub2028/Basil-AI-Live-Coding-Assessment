@@ -1,0 +1,164 @@
+[
+  {
+    "stage": "original_all",
+    "status": "failed",
+    "seed": 0,
+    "epochs": 30,
+    "threads": 2,
+    "device": "cpu",
+    "timestamp_utc": "2026-11-01T07:35:35.573905+00:00",
+    "command": [
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/bin/python",
+      "-u",
+      "-c",
+      "import sys,runpy; sys.path.insert(0,sys.argv[2]); script=sys.argv.pop(1); sys.argv.pop(1); runpy.run_path(script,run_name='__main__')",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/artifacts/original_source/train.py",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/artifacts/original_source",
+      "--seed",
+      "0",
+      "--epochs",
+      "30",
+      "--channels",
+      "all"
+    ],
+    "log": "artifacts/attempts/20261101T073535568968Z/original_all/run.log",
+    "source_sha256": {
+      "data.py": "1511f3196ac39fbc6f7de3a87a7485ea995b58896e9398fb0242bd00be9b8d50",
+      "erd.py": "140927f96fabb9081956d353ae4b9d93a74ef6b669bb2ceeb181e96999b414f6",
+      "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+      "train.py": "f2df852f2a463e9ada4c6a085c4f983fa028edfd6f2215bb1c19db2374863893"
+    },
+    "test_acc": null,
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "mne": "1.13.2",
+      "matplotlib": "3.11.2",
+      "torch": "2.15.0+cpu"
+    },
+    "returncode": 1
+  },
+  {
+    "stage": "corrected_all",
+    "status": "failed",
+    "seed": 0,
+    "epochs": 30,
+    "threads": 2,
+    "device": "cpu",
+    "timestamp_utc": "2026-11-01T07:35:39.128625+00:00",
+    "command": [
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/bin/python",
+      "-u",
+      "-c",
+      "import sys,runpy; sys.path.insert(0,sys.argv[2]); script=sys.argv.pop(1); sys.argv.pop(1); runpy.run_path(script,run_name='__main__')",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose",
+      "--seed",
+      "0",
+      "--epochs",
+      "30",
+      "--channels",
+      "all"
+    ],
+    "log": "artifacts/attempts/20261101T073535568968Z/corrected_all/run.log",
+    "source_sha256": {
+      "data.py": "6885216cf4564ad38239d96f3be57862c330ffd7c546353b800171c292f42080",
+      "erd.py": "65e3224122b27f683095b96ecf7d07ca74c4aec6688ff17342ab37e801744ba0",
+      "evaluation.py": "a40987cd0e1ca44fe65bf1fff9a679c75a7389c837915c18c872a5f18aded545",
+      "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+      "run_part1.py": "bec1623918343528d4bf5c51f52e7f04d6ae243c9bc6a43fd4a51c6f805d2ca9",
+      "train.py": "6447d71e65a02c6fdfe3372e72c8237e42c44981a4b554a0bf13f8ee8a5ea94d"
+    },
+    "test_acc": null,
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "mne": "1.13.2",
+      "matplotlib": "3.11.2",
+      "torch": "2.15.0+cpu"
+    },
+    "returncode": 1
+  },
+  {
+    "stage": "erd_mu",
+    "status": "failed",
+    "seed": 0,
+    "epochs": 30,
+    "threads": 2,
+    "device": "cpu",
+    "timestamp_utc": "2026-11-01T07:35:41.634959+00:00",
+    "command": [
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/bin/python",
+      "-u",
+      "-c",
+      "import sys,runpy; sys.path.insert(0,sys.argv[2]); script=sys.argv.pop(1); sys.argv.pop(1); runpy.run_path(script,run_name='__main__')",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/erd.py",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose",
+      "--band",
+      "mu"
+    ],
+    "log": "artifacts/attempts/20261101T073535568968Z/erd_mu/run.log",
+    "source_sha256": {
+      "data.py": "6885216cf4564ad38239d96f3be57862c330ffd7c546353b800171c292f42080",
+      "erd.py": "65e3224122b27f683095b96ecf7d07ca74c4aec6688ff17342ab37e801744ba0",
+      "evaluation.py": "a40987cd0e1ca44fe65bf1fff9a679c75a7389c837915c18c872a5f18aded545",
+      "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+      "run_part1.py": "bec1623918343528d4bf5c51f52e7f04d6ae243c9bc6a43fd4a51c6f805d2ca9",
+      "train.py": "6447d71e65a02c6fdfe3372e72c8237e42c44981a4b554a0bf13f8ee8a5ea94d"
+    },
+    "test_acc": null,
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "mne": "1.13.2",
+      "matplotlib": "3.11.2",
+      "torch": "2.15.0+cpu"
+    },
+    "returncode": 1
+  },
+  {
+    "stage": "corrected_frontal",
+    "status": "failed",
+    "seed": 0,
+    "epochs": 30,
+    "threads": 2,
+    "device": "cpu",
+    "timestamp_utc": "2026-11-01T07:35:42.770262+00:00",
+    "command": [
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/bin/python",
+      "-u",
+      "-c",
+      "import sys,runpy; sys.path.insert(0,sys.argv[2]); script=sys.argv.pop(1); sys.argv.pop(1); runpy.run_path(script,run_name='__main__')",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose",
+      "--seed",
+      "0",
+      "--epochs",
+      "30",
+      "--channels",
+      "frontal"
+    ],
+    "log": "artifacts/attempts/20261101T073535568968Z/corrected_frontal/run.log",
+    "source_sha256": {
+      "data.py": "6885216cf4564ad38239d96f3be57862c330ffd7c546353b800171c292f42080",
+      "erd.py": "65e3224122b27f683095b96ecf7d07ca74c4aec6688ff17342ab37e801744ba0",
+      "evaluation.py": "a40987cd0e1ca44fe65bf1fff9a679c75a7389c837915c18c872a5f18aded545",
+      "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+      "run_part1.py": "bec1623918343528d4bf5c51f52e7f04d6ae243c9bc6a43fd4a51c6f805d2ca9",
+      "train.py": "6447d71e65a02c6fdfe3372e72c8237e42c44981a4b554a0bf13f8ee8a5ea94d"
+    },
+    "test_acc": null,
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "mne": "1.13.2",
+      "matplotlib": "3.11.2",
+      "torch": "2.15.0+cpu"
+    },
+    "returncode": 1
+  }
+]

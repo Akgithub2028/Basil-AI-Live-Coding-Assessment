@@ -1,0 +1,180 @@
+{
+  "model": "EEGNet",
+  "model_config": {
+    "n_ch": 64,
+    "n_times": 481,
+    "F1": 8,
+    "D": 2,
+    "F2": 16,
+    "kern": 80,
+    "drop": 0.5
+  },
+  "data_config": {
+    "runs": [
+      6,
+      10,
+      14
+    ],
+    "filter_hz": [
+      1,
+      40
+    ],
+    "crop_s": [
+      1,
+      4
+    ],
+    "sfreq": 160,
+    "normalization": "per-channel; fitted to training trials only"
+  },
+  "reference_result": {
+    "stage": "corrected_all",
+    "status": "ok",
+    "seed": 0,
+    "epochs": 30,
+    "threads": 2,
+    "device": "cpu",
+    "timestamp_utc": "2026-11-01T07:22:35.658322+00:00",
+    "command": [
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/bin/python",
+      "-u",
+      "-c",
+      "import sys,runpy; sys.path.insert(0,sys.argv[2]); script=sys.argv.pop(1); sys.argv.pop(1); runpy.run_path(script,run_name='__main__')",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py",
+      "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose",
+      "--seed",
+      "0",
+      "--epochs",
+      "30",
+      "--channels",
+      "all"
+    ],
+    "log": "artifacts/attempts/20261101T071451704509Z/corrected_all/run.log",
+    "source_sha256": {
+      "data.py": "6885216cf4564ad38239d96f3be57862c330ffd7c546353b800171c292f42080",
+      "erd.py": "65e3224122b27f683095b96ecf7d07ca74c4aec6688ff17342ab37e801744ba0",
+      "evaluation.py": "a40987cd0e1ca44fe65bf1fff9a679c75a7389c837915c18c872a5f18aded545",
+      "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+      "train.py": "6447d71e65a02c6fdfe3372e72c8237e42c44981a4b554a0bf13f8ee8a5ea94d"
+    },
+    "test_acc": 0.5333333333333333,
+    "versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "scikit-learn": "1.9.1",
+      "mne": "1.13.2",
+      "matplotlib": "3.11.2",
+      "torch": "2.15.0+cpu"
+    },
+    "returncode": 0,
+    "channels": "all",
+    "best_epoch": 3,
+    "val_acc": 0.5777777777777777,
+    "selection": "validation_accuracy",
+    "train_subjects": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7
+    ],
+    "val_subjects": [
+      6,
+      8
+    ],
+    "test_subjects": [
+      9,
+      10
+    ],
+    "n_train": 270,
+    "n_val": 90,
+    "n_channels": 64,
+    "n_times": 481,
+    "channel_names": [
+      "FC5",
+      "FC3",
+      "FC1",
+      "FCz",
+      "FC2",
+      "FC4",
+      "FC6",
+      "C5",
+      "C3",
+      "C1",
+      "Cz",
+      "C2",
+      "C4",
+      "C6",
+      "CP5",
+      "CP3",
+      "CP1",
+      "CPz",
+      "CP2",
+      "CP4",
+      "CP6",
+      "Fp1",
+      "Fpz",
+      "Fp2",
+      "AF7",
+      "AF3",
+      "AFz",
+      "AF4",
+      "AF8",
+      "F7",
+      "F5",
+      "F3",
+      "F1",
+      "Fz",
+      "F2",
+      "F4",
+      "F6",
+      "F8",
+      "FT7",
+      "FT8",
+      "T7",
+      "T8",
+      "T9",
+      "T10",
+      "TP7",
+      "TP8",
+      "P7",
+      "P5",
+      "P3",
+      "P1",
+      "Pz",
+      "P2",
+      "P4",
+      "P6",
+      "P8",
+      "PO7",
+      "PO3",
+      "POz",
+      "PO4",
+      "PO8",
+      "O1",
+      "Oz",
+      "O2",
+      "Iz"
+    ],
+    "lr": 0.001,
+    "batch_size": 64,
+    "n_params": 2738,
+    "train_class_counts": [
+      133,
+      137
+    ],
+    "val_class_counts": [
+      45,
+      45
+    ],
+    "test_class_counts": [
+      46,
+      44
+    ],
+    "n_test": 90,
+    "layout_note": "Execution commands preserve the original paths; outputs subsequently organized under part1_diagnose."
+  },
+  "report": "../ANSWERS.md",
+  "figure": "../erd_mu.png",
+  "weights_saved_in_reference_run": false
+}

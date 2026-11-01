@@ -34,6 +34,13 @@ def local_environment(threads):
     env.update(OMP_NUM_THREADS=str(threads), MKL_NUM_THREADS=str(threads),
                OPENBLAS_NUM_THREADS=str(threads), PYTHONDONTWRITEBYTECODE="1",
                PYTHONHASHSEED="0", MNE_LOGGING_LEVEL="WARNING")
+    # MNE checks its config with use_env=False when deciding whether to prompt.
+    # Keep this project-local config synchronized after moving the directory.
+    config = Path(env["_MNE_FAKE_HOME_DIR"]) / ".mne" / "mne-python.json"
+    config.parent.mkdir(parents=True, exist_ok=True)
+    settings = json.loads(config.read_text()) if config.exists() else {}
+    settings["MNE_DATASETS_EEGBCI_PATH"] = env["MNE_DATASETS_EEGBCI_PATH"]
+    config.write_text(json.dumps(settings, indent=2) + "\n")
     return env
 
 
@@ -81,6 +88,7 @@ def run_stage(stage, script, arguments, attempt, env, args):
         for line in process.stdout:
             print(line, end="", flush=True)
             log.write(line)
+            log.flush()
         record["returncode"] = process.wait()
     record["status"] = "ok" if record["returncode"] == 0 else "failed"
     if record["status"] == "ok" and stage != "erd_mu":
@@ -163,11 +171,12 @@ def main():
     ]
     records = [run_stage(stage, script, arguments, attempt, env, args)
                for stage, script, arguments in experiments]
+    (ARTIFACTS / "latest_attempt.json").write_text(json.dumps(records, indent=2) + "\n")
+    if any(r["status"] != "ok" for r in records):
+        print("\nThis attempt failed; see latest_attempt.json and its logs. Existing successful results and answers were preserved.")
+        return 1
     (ARTIFACTS / "latest_run.json").write_text(json.dumps(records, indent=2) + "\n")
     update_answers(records, args)
-    if any(r["status"] != "ok" for r in records):
-        print("\nPart 1 experiments are INCOMPLETE; see recorded failures. No missing accuracy was invented.")
-        return 1
     print("\nExperiments finished. Review erd_mu.png and the data-derived answers in ANSWERS.md.")
     print("The baseline comparison changes both the task data and the evaluation protocol.")
     return 0

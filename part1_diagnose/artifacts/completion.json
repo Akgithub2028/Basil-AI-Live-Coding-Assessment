@@ -1,0 +1,27 @@
+{
+  "status": "complete",
+  "scope": "Part 1 Tasks 1\u20134",
+  "device": "cpu",
+  "experiments": "all four required stages completed; successful outputs preserved",
+  "offline_checks": {
+    "passed": 9,
+    "skipped": 0
+  },
+  "bug_fix_commits": {
+    "runs": "13bfc5f",
+    "epoch_tail": "0cb352f",
+    "erd_baseline": "e7e8745",
+    "subject_split": "119e5ab",
+    "normalization": "ce51b59",
+    "checkpoint_selection": "0a78619"
+  },
+  "deliverables": [
+    "ANSWERS.md",
+    "results.jsonl",
+    "erd_mu.png",
+    "erd_mu_summary.json",
+    "artifacts/baseline.json"
+  ],
+  "training_rerun_after_user_stop_request": false,
+  "part2_started": false
+}

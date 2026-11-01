@@ -13,7 +13,7 @@ The untouched starter is preserved in commit `85b84b8`. Intended baseline:
 The initial attempt failed because PyTorch was missing and terminal DNS was
 unavailable; that failure log is retained in `artifacts/original_attempt.log`.
 After the CPU dependencies and EEG files became available, the full original
-and corrected experiments completed successfully. Eight offline checks pass.
+and corrected experiments completed successfully. Nine offline checks pass.
 Earlier failed records in `results.jsonl` have `status: "failed"` and null
 accuracy; the four records from the successful attempt have `status: "ok"`.
 
@@ -208,3 +208,16 @@ normalization `ce51b59`, checkpoint selection `0a78619`. Additional cue-onset
 control: `1ac0d25`. The aggregate before/after difference does not isolate
 individual bug effects because the data, splits, retained trials and window
 change together; we did not tune the corrected pipeline against the test score.
+
+The EEGNet reference configuration and measured result are packaged in
+`artifacts/baseline.json` for Part 2. The reference run did not save weights;
+weight export is now implemented for future runs, but no extra training was
+performed solely to produce a checkpoint.
+
+A later layout-verification attempt hit MNE's interactive cache-path prompt;
+its failure is retained in `artifacts/latest_attempt.json`. The runner now
+synchronizes its project-local MNE configuration, a no-download regression
+check covers stale paths, and failed attempts preserve completed reports.
+That filesystem failure does not invalidate the completed experiment records
+in `artifacts/latest_run.json`; no training rerun was performed after the
+user requested preserving the correct results.

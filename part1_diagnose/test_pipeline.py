@@ -2,7 +2,10 @@
 import contextlib
 import importlib.util
 import io
+import os
+from pathlib import Path
 import sys
+import tempfile
 import unittest
 from unittest.mock import patch, mock_open
 
@@ -12,6 +15,25 @@ import numpy as np
 import data
 from erd import erd_percent
 from evaluation import split_subjects, standardize_from_train
+
+
+class EnvironmentTests(unittest.TestCase):
+    def test_moved_cache_path_does_not_prompt_or_download(self):
+        import run_part1
+        cache = Path(__file__).resolve().parent / ".cache"
+        cache.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(dir=cache) as temp:
+            with patch.object(run_part1, "ROOT", Path(temp)):
+                env = run_part1.local_environment(2)
+                config = Path(env["_MNE_FAKE_HOME_DIR"]) / ".mne" / "mne-python.json"
+                config.write_text('{"MNE_DATASETS_EEGBCI_PATH": "/obsolete/path"}')
+                env = run_part1.local_environment(2)
+            with patch.dict(os.environ, env), \
+                 patch("builtins.input", side_effect=AssertionError("Unexpected MNE prompt")):
+                # Empty subject/run lists exercise the public path update, without EEG I/O.
+                files = mne.datasets.eegbci.load_data(
+                    [], [], path=env["MNE_DATASETS_EEGBCI_PATH"], verbose="error")
+                self.assertEqual(files, [])
 
 
 class EvaluationTests(unittest.TestCase):

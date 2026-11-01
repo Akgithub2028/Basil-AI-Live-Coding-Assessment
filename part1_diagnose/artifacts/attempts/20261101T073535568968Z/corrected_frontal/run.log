@@ -1,0 +1,42 @@
+Do you want to set the path:
+    /media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/.cache/mne
+as the default EEGBCI dataset path in the mne-python config [y]/n? Traceback (most recent call last):
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/lib/python3.12/site-packages/mne/utils/check.py", line 1292, in _safe_input
+    return input(msg)
+           ^^^^^^^^^^
+EOFError: EOF when reading a line
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py", line 110, in <module>
+    main()
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py", line 50, in main
+    X, y, groups, ch_names = build_dataset(args.subjects)
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/data.py", line 60, in build_dataset
+    X, y, ch_names = epoch_subject(s)
+                     ^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/data.py", line 46, in epoch_subject
+    raw = load_raw(subject)
+          ^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/data.py", line 28, in load_raw
+    files = eegbci.load_data(subject, runs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<decorator-gen-280>", line 12, in load_data
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/lib/python3.12/site-packages/mne/datasets/eegbci/eegbci.py", line 225, in load_data
+    _do_path_update(path, update_path, config_key, name)
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/lib/python3.12/site-packages/mne/datasets/utils.py", line 165, in _do_path_update
+    answer = _safe_input(msg, alt="pass update_path=True")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.venv/lib/python3.12/site-packages/mne/utils/check.py", line 1296, in _safe_input
+    raise RuntimeError(
+RuntimeError: Could not use input() to get a response to:
+Do you want to set the path:
+    /media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/.cache/mne
+as the default EEGBCI dataset path in the mne-python config [y]/n? 
+You can pass update_path=True to avoid this error.

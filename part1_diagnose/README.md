@@ -31,7 +31,11 @@ Outputs inside `part1_diagnose/`:
 - `erd_mu.png` and `erd_mu_summary.json`: generated only from real EEG data.
 - `ANSWERS.md`: bug explanations, analytical answers, and results populated by
   the runner. Plot interpretation must be checked against the actual curves.
-- `artifacts/latest_run.json`: records from the latest full attempt.
+- `artifacts/latest_run.json`: records from the latest successful full run.
+- `artifacts/latest_attempt.json`: latest attempt, including a failure; a failed
+  attempt preserves the successful results and answers.
+- `artifacts/baseline.json`: the measured EEGNet reference and its configuration
+  for Part 2. Future training also exports selected weights and normalization.
 - `artifacts/attempts/<timestamp>/`: full logs and individual raw outputs.
 
 The preserved original source archive is verified against SHA-256 checksums.
@@ -62,6 +66,6 @@ logs and results must stay in the project directory.
 All four experiment stages completed on CPU (seed 0, 30 epochs, two threads).
 The original flawed score is 66.67% (56/84); corrected all-channel accuracy is
 53.33% (48/90), and frontal-only accuracy is 48.89% (44/90). The ERD plot is
-saved as `erd_mu.png`. All eight offline checks pass. See `ANSWERS.md` for the
+saved as `erd_mu.png`. All nine offline checks pass. See `ANSWERS.md` for the
 six defects, interpretation and limitations; these near-chance corrected
 results do not demonstrate reliable cross-subject decoding or EOG exploitation.

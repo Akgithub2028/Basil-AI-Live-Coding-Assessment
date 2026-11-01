@@ -1,3 +1,4 @@
+test_moved_cache_path_does_not_prompt_or_download (test_pipeline.EnvironmentTests.test_moved_cache_path_does_not_prompt_or_download) ... ok
 test_held_out_perturbation_cannot_change_training_preprocessing (test_pipeline.EvaluationTests.test_held_out_perturbation_cannot_change_training_preprocessing) ... ok
 test_partitions_are_complete_and_subject_disjoint (test_pipeline.EvaluationTests.test_partitions_are_complete_and_subject_disjoint) ... ok
 test_too_few_subjects_rejected (test_pipeline.EvaluationTests.test_too_few_subjects_rejected) ... ok
@@ -8,6 +9,6 @@ test_zero_reference_power_rejected (test_pipeline.SignalTests.test_zero_referenc
 test_validation_selects_checkpoint_and_test_is_opened_once (test_pipeline.TrainingTests.test_validation_selects_checkpoint_and_test_is_opened_once) ... ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 4.237s
+Ran 9 tests in 4.284s
 
 OK
