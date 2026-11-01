@@ -86,6 +86,10 @@ def run_stage(stage, script, arguments, attempt, env, args):
     if record["status"] == "ok" and stage != "erd_mu":
         raw = json.loads((work / "results.jsonl").read_text().splitlines()[-1])
         record.update(raw)
+        if stage == "corrected_all":
+            checkpoint = f"eegnet_all_seed{args.seed}.pt"
+            shutil.copyfile(work / checkpoint, ARTIFACTS / checkpoint)
+            record["checkpoint"] = str((ARTIFACTS / checkpoint).relative_to(ROOT))
     elif record["status"] == "ok":
         for name in ["erd_mu.png", "erd_mu_summary.json"]:
             shutil.copyfile(work / name, ROOT / name)

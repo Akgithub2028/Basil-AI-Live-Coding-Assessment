@@ -9,7 +9,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 
-from data import build_dataset, SUBJECTS
+from data import build_dataset, SUBJECTS, RUNS, CROP, L_FREQ, H_FREQ
 from model import EEGNet, count_params
 from evaluation import split_subjects, standardize_from_train
 
@@ -65,7 +65,8 @@ def main():
     X, mean, std = standardize_from_train(X, tr)
 
     n_ch, n_t = X.shape[1], X.shape[2]
-    model = EEGNet(n_ch, n_t)
+    model_config = dict(n_ch=n_ch, n_times=n_t, F1=8, D=2, F2=16, kern=80, drop=0.5)
+    model = EEGNet(**model_config)
     print(f"EEGNet: {count_params(model)} params")
 
     opt = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-3)
@@ -104,6 +105,12 @@ def main():
     print(json.dumps(result))
     with open("results.jsonl", "a") as f:
         f.write(json.dumps(result) + "\n")
+    # Carry the validation-selected baseline and its fitted preprocessing forward.
+    torch.save(dict(state_dict=best_state, model_config=model_config,
+                    mean=torch.from_numpy(mean), std=torch.from_numpy(std), result=result,
+                    data_config=dict(runs=RUNS, crop_s=CROP,
+                                     filter_hz=[L_FREQ, H_FREQ], sfreq=160)),
+               f"eegnet_{args.channels}_seed{args.seed}.pt")
 
 
 if __name__ == "__main__":

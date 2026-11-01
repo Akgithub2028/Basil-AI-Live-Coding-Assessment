@@ -114,12 +114,17 @@ class TrainingTests(unittest.TestCase):
         with patch.object(train, "build_dataset", return_value=(X, y, groups, ["C3", "C4"])), \
              patch.object(train, "EEGNet", return_value=model), \
              patch.object(train, "evaluate", side_effect=fake_evaluate), \
+             patch.object(train.torch, "save") as save_checkpoint, \
              patch.object(sys, "argv", ["train.py", "--epochs", "3"]), \
              patch("builtins.open", mock_open()), contextlib.redirect_stdout(io.StringIO()):
             train.main()
         self.assertEqual(len(calls), 4)  # 3 validation calls, then one test call
         for key in states[-1]:
             torch.testing.assert_close(states[-1][key], states[1][key])
+        save_checkpoint.assert_called_once()
+        saved = save_checkpoint.call_args.args[0]
+        for key in states[1]:
+            torch.testing.assert_close(saved["state_dict"][key], states[1][key])
         tr, va, te = split_subjects(groups)
         Z, _, _ = standardize_from_train(X, tr)
         for observed in calls[:-1]:
