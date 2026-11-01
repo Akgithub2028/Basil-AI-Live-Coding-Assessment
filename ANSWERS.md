@@ -48,6 +48,16 @@ can remain. Keep the broadband filter for the later frontal-channel audit.
 
 ### Sources and interpretation
 
+### Fix 3 — ERD uses post-cue activity as rest (`erd.py`)
+
+Wrong: the baseline was 0–0.5 s after the cue although its comment called it
+pre-imagery rest.
+
+Effect: normalizing to a task-contaminated reference can attenuate, amplify or
+reverse ERD/ERS; there is no universal direction. It does not change classifier
+accuracy because `train.py` does not use `erd.py`. Fix: reference power to
+−1.5 to −0.5 s pre-cue and reject missing/nonpositive reference power.
+
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding
   the first second to avoid classifying cue-evoked responses.

@@ -15,7 +15,7 @@ import matplotlib.pyplot as plt
 from data import load_raw, get_events, EVENT_ID, TMIN, TMAX, SUBJECTS
 
 BANDS = {"mu": (8.0, 13.0), "beta": (13.0, 30.0)}
-BASELINE = (0.0, 0.5)   # rest period before the imagery starts (s)
+BASELINE = (-1.5, -0.5)  # pre-cue rest, with a buffer from cue onset (s)
 PICKS = ["C3", "Cz", "C4"]
 
 
@@ -32,7 +32,11 @@ def erd_percent(epochs, cond):
     p = epochs[cond].get_data(copy=True).mean(axis=0)          # (ch, time)
     t = epochs.times
     b = (t >= BASELINE[0]) & (t < BASELINE[1])
+    if not b.any():
+        raise ValueError("Epochs do not contain the pre-cue ERD baseline.")
     ref = p[:, b].mean(axis=1, keepdims=True)
+    if np.any(ref <= 0) or not np.isfinite(ref).all():
+        raise ValueError("ERD requires finite, positive baseline power.")
     return (p - ref) / ref * 100.0, t
 
 
