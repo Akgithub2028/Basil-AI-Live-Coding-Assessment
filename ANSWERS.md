@@ -23,8 +23,6 @@ the sixth scientific correction. The latter reduces an acknowledged confound;
 it is not proof that all remaining features are motor imagery. We do not count
 the intentionally empty frontal group (Task 3) as a silent planted defect.
 
-### Sources and interpretation
-
 ### Fix 1 — actual movement loaded as imagery (`data.py`)
 
 Wrong: runs 5/9/13 contain executed bilateral movements, while the task asks
@@ -34,6 +32,21 @@ Effect: the original number describes a different task and can be inflated by
 actual movement, muscle activity and stronger movement-related signals; the
 direction of the measured accuracy change is not guaranteed. Fix: select
 6/10/14 without changing the T1/T2 hands/feet label mapping.
+
+### Fix 2 — cue-onset activity included in the decoding window (`data.py`)
+
+Wrong: the original 0–4 s crop includes the immediate response to a visual cue
+whose position predicts the class. This weakens an interpretation as decoding
+motor imagery, even if the prediction itself is correct.
+
+Effect: cue-evoked visual/ocular information can raise accuracy above that
+attributable to imagery; dropping it can lower accuracy, but the direction is
+data-dependent. Fix: decode 1–4 s (481 samples at 160 Hz, inclusive endpoint).
+This is a confound-reduction choice, not a mathematical error or a complete
+ocular-artifact removal method: sustained gaze and zero-phase filter smearing
+can remain. Keep the broadband filter for the later frontal-channel audit.
+
+### Sources and interpretation
 
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding

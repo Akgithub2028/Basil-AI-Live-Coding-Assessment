@@ -17,7 +17,8 @@ SUBJECTS = list(range(1, 11))
 
 L_FREQ, H_FREQ = 1.0, 40.0   # broadband filter applied to the continuous recording
 TMIN, TMAX = -2.0, 5.0       # epoch window around the cue (s)
-CROP = (0.0, 4.0)            # part of each trial the network sees (s)
+# Exclude the initial cue-evoked response; sustained gaze may still confound MI.
+CROP = (1.0, 4.0)            # part of each trial the network sees (s)
 EVENT_ID = dict(hands=1, feet=2)
 
 
