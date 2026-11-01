@@ -3,4 +3,4 @@
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
-artifacts/part1/original_source/
+part1_diagnose/artifacts/original_source/

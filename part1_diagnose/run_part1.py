@@ -1,6 +1,6 @@
 """Run all Part 1 experiments without editing the preserved original starter.
 
-From the repository root: python run_part1.py
+From the repository root: python part1_diagnose/run_part1.py
 Requires part1_diagnose/requirements.txt and internet for the first EEG download.
 All generated files, caches and temporary files stay within this directory.
 """
@@ -17,7 +17,7 @@ import sys
 import zipfile
 
 ROOT = Path(__file__).resolve().parent
-ARTIFACTS = ROOT / "artifacts" / "part1"
+ARTIFACTS = ROOT / "artifacts"
 
 
 def local_environment(threads):
@@ -108,7 +108,7 @@ def update_answers(records, args):
              f"| Corrected all channels | {accuracy(all_ch)} |",
              f"| Corrected frontal only | {accuracy(frontal)} |",
              f"| Mu ERD | {'`erd_mu.png` generated' if erd['status'] == 'ok' else 'not generated (run failed)'} |",
-             "", "Full records: `results.jsonl`; per-run logs: `artifacts/part1/attempts/`." ]
+             "", "Full records: `results.jsonl`; per-run logs: `artifacts/attempts/`." ]
     replacements = {"RESULTS": "\n".join(table)}
     if erd["status"] == "ok":
         values = erd["summary"]["mean_erd_pct"]
@@ -149,7 +149,7 @@ def main():
     attempt = ARTIFACTS / "attempts" / datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
     attempt.mkdir(parents=True)
     original = original_source()
-    fixed = ROOT / "part1_diagnose"
+    fixed = ROOT
     common = ["--seed", str(args.seed), "--epochs", str(args.epochs)]
     experiments = [
         ("original_all", original / "train.py", [*common, "--channels", "all"]),

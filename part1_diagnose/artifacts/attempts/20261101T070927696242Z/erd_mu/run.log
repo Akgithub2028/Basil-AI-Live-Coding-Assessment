@@ -1,0 +1,88 @@
+Downloading file 'S001/S001R06.edf' from 'https://physionet.org/files/eegmmidb/1.0.0/S001/S001R06.edf' to '/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/.cache/mne/MNE-eegbci-data/files/eegmmidb/1.0.0'.
+Failed to download 'S001R06.edf'. Will attempt the download again 2 more times.
+Failed to download 'S001R06.edf'. Will attempt the download again 1 more time.
+Traceback (most recent call last):
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 239, in _new_conn
+    sock = connection.create_connection(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/util/connection.py", line 60, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/socket.py", line 963, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno -2] Name or service not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 793, in urlopen
+    response = self._make_request(
+               ^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 494, in _make_request
+    raise new_e
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 470, in _make_request
+    self._validate_conn(conn)
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 1125, in _validate_conn
+    conn.connect()
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 827, in connect
+    self.sock = sock = self._new_conn()
+                       ^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connection.py", line 246, in _new_conn
+    raise NameResolutionError(self.host, self, e) from e
+urllib3.exceptions.NameResolutionError: HTTPSConnection(host='physionet.org', port=443): Failed to resolve 'physionet.org' ([Errno -2] Name or service not known)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/adapters.py", line 696, in send
+    resp = conn.urlopen(
+           ^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/connectionpool.py", line 847, in urlopen
+    retries = retries.increment(
+              ^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/urllib3/util/retry.py", line 555, in increment
+    raise MaxRetryError(_pool, url, reason) from reason  # type: ignore[arg-type]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R06.edf (Caused by NameResolutionError("HTTPSConnection(host='physionet.org', port=443): Failed to resolve 'physionet.org' ([Errno -2] Name or service not known)"))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/erd.py", line 83, in <module>
+    main()
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/erd.py", line 53, in main
+    raw = load_raw(s)
+          ^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/data.py", line 27, in load_raw
+    files = eegbci.load_data(subject, runs)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<decorator-gen-280>", line 12, in load_data
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/mne/datasets/eegbci/eegbci.py", line 221, in load_data
+    fetcher.fetch(file_part)
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/pooch/core.py", line 598, in fetch
+    stream_download(
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/pooch/core.py", line 823, in stream_download
+    downloader(url, tmp, pooch)
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/pooch/downloaders.py", line 230, in __call__
+    response = requests.get(url, timeout=timeout, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/api.py", line 87, in get
+    return request("get", url, params=params, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/api.py", line 71, in request
+    return session.request(method=method, url=url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/sessions.py", line 651, in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/sessions.py", line 784, in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/.venv/lib/python3.12/site-packages/requests/adapters.py", line 729, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='physionet.org', port=443): Max retries exceeded with url: /files/eegmmidb/1.0.0/S001/S001R06.edf (Caused by NameResolutionError("HTTPSConnection(host='physionet.org', port=443): Failed to resolve 'physionet.org' ([Errno -2] Name or service not known)"))

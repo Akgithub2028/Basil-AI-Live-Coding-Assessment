@@ -1,0 +1,50 @@
+{
+  "subject": 1,
+  "runs": [
+    5,
+    9,
+    13
+  ],
+  "source": "untouched starter 85b84b8; cached real EEG",
+  "n_events": 45,
+  "windows": [
+    {
+      "window_s": [
+        -2,
+        5
+      ],
+      "n_kept": 42,
+      "dropped": [
+        {
+          "event_index": 14,
+          "onset_s": 120.4,
+          "reason": [
+            "BAD boundary"
+          ]
+        },
+        {
+          "event_index": 29,
+          "onset_s": 245.4,
+          "reason": [
+            "BAD boundary"
+          ]
+        },
+        {
+          "event_index": 44,
+          "onset_s": 370.4,
+          "reason": [
+            "TOO_SHORT"
+          ]
+        }
+      ]
+    },
+    {
+      "window_s": [
+        -2,
+        4
+      ],
+      "n_kept": 45,
+      "dropped": []
+    }
+  ]
+}

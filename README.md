@@ -8,6 +8,16 @@ part1_diagnose/     Part 1 — a buggy motor-imagery pipeline you must fix and i
 part2_transformer/  Part 2 — give self-attention a fair shot on tiny EEG data
 ```
 
+## Part 1 CPU workflow
+
+The corrected Part 1 code, offline checks and CPU setup instructions are in
+[`part1_diagnose/README.md`](part1_diagnose/README.md). From the repository root,
+after installing its requirements, run `python part1_diagnose/run_part1.py` to reproduce the
+original starter baseline, corrected baseline, mu ERD and frontal-channel
+control. The runner keeps all downloaded data, caches and outputs in this
+`part1_diagnose/` directory and updates its `ANSWERS.md` with measured results. No notebook or GPU
+is required. Part 2 remains the original starter.
+
 ## Before the clock starts
 
 Set up the environment once (conda covers both parts):

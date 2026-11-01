@@ -1,0 +1,80 @@
+{
+  "band": "mu",
+  "baseline_s": [
+    -1.5,
+    -0.5
+  ],
+  "analysis_window_s": [
+    1,
+    4
+  ],
+  "subjects": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "trial_counts": {
+    "1": {
+      "hands": 21,
+      "feet": 24
+    },
+    "2": {
+      "hands": 24,
+      "feet": 21
+    },
+    "3": {
+      "hands": 21,
+      "feet": 24
+    },
+    "4": {
+      "hands": 22,
+      "feet": 23
+    },
+    "5": {
+      "hands": 23,
+      "feet": 22
+    },
+    "6": {
+      "hands": 22,
+      "feet": 23
+    },
+    "7": {
+      "hands": 22,
+      "feet": 23
+    },
+    "8": {
+      "hands": 23,
+      "feet": 22
+    },
+    "9": {
+      "hands": 23,
+      "feet": 22
+    },
+    "10": {
+      "hands": 23,
+      "feet": 22
+    }
+  },
+  "aggregation": "mean of within-subject ERD curves; equal subject weights",
+  "mean_erd_pct": {
+    "C3": {
+      "hands": -13.236443496907906,
+      "feet": 0.9940463971272909
+    },
+    "Cz": {
+      "hands": -3.14376458190283,
+      "feet": -3.610972346714489
+    },
+    "C4": {
+      "hands": -7.756847693890188,
+      "feet": -3.8575065243749833
+    }
+  }
+}

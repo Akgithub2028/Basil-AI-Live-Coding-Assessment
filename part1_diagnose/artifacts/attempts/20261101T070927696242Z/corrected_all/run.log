@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "<frozen runpy>", line 286, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/media/aayaann-kausar/New Volume1/Basil AI OA/eeg_dl_exam_3hr (1)/eeg_dl_exam_3hr/part1_diagnose/train.py", line 9, in <module>
+    import torch
+ModuleNotFoundError: No module named 'torch'

@@ -1,0 +1,36 @@
+data: (450, 11, 481), subjects=10, class balance=[224 226]
+train subjects: [1, 2, 3, 4, 5, 7], trials=270
+val subjects: [6, 8], trials=90
+test subjects: [9, 10], trials=90
+EEGNet: 1890 params
+epoch   0  loss 0.623  val 0.467
+epoch   1  loss 0.708  val 0.478
+epoch   2  loss 0.677  val 0.511
+epoch   3  loss 0.666  val 0.511
+epoch   4  loss 0.747  val 0.533
+epoch   5  loss 0.645  val 0.533
+epoch   6  loss 0.739  val 0.522
+epoch   7  loss 0.637  val 0.511
+epoch   8  loss 0.753  val 0.489
+epoch   9  loss 0.661  val 0.522
+epoch  10  loss 0.664  val 0.511
+epoch  11  loss 0.642  val 0.556
+epoch  12  loss 0.665  val 0.578
+epoch  13  loss 0.544  val 0.556
+epoch  14  loss 0.833  val 0.556
+epoch  15  loss 0.630  val 0.556
+epoch  16  loss 0.566  val 0.544
+epoch  17  loss 0.720  val 0.567
+epoch  18  loss 0.608  val 0.544
+epoch  19  loss 0.623  val 0.556
+epoch  20  loss 0.572  val 0.533
+epoch  21  loss 0.751  val 0.522
+epoch  22  loss 0.569  val 0.533
+epoch  23  loss 0.441  val 0.522
+epoch  24  loss 0.648  val 0.522
+epoch  25  loss 0.648  val 0.544
+epoch  26  loss 0.774  val 0.567
+epoch  27  loss 0.564  val 0.556
+epoch  28  loss 0.649  val 0.556
+epoch  29  loss 0.590  val 0.567
+{"channels": "frontal", "seed": 0, "best_epoch": 12, "val_acc": 0.5777777777777777, "selection": "validation_accuracy", "train_subjects": [1, 2, 3, 4, 5, 7], "val_subjects": [6, 8], "test_subjects": [9, 10], "n_train": 270, "n_val": 90, "n_channels": 11, "n_times": 481, "channel_names": ["Fp1", "Fpz", "Fp2", "AF3", "AFz", "AF4", "F7", "F3", "Fz", "F4", "F8"], "epochs": 30, "lr": 0.001, "batch_size": 64, "n_params": 1890, "train_class_counts": [133, 137], "val_class_counts": [45, 45], "test_class_counts": [46, 44], "test_acc": 0.4888888888888889, "n_test": 90}
