@@ -70,6 +70,16 @@ This is not an eight-subject training result: validation is held out separately.
 
 ### Sources and interpretation
 
+### Fix 5 — preprocessing sees validation and test (`train.py`)
+
+Wrong: channel means and standard deviations were fitted to all trials before
+the split, leaking the distribution of held-out people into preprocessing.
+
+Effect: evaluation is contaminated and may be optimistic through adaptation to
+the held-out distribution, although unsupervised normalization leakage can
+move a particular accuracy either way. Fix: split first, fit statistics using
+training trials only, then apply those frozen statistics to every partition.
+
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding
   the first second to avoid classifying cue-evoked responses.

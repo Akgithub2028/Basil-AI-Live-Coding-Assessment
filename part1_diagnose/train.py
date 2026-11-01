@@ -11,7 +11,7 @@ import torch.nn as nn
 
 from data import build_dataset, SUBJECTS
 from model import EEGNet, count_params
-from evaluation import split_subjects
+from evaluation import split_subjects, standardize_from_train
 
 # Electrode groups for the channel-subset run (Task 3).
 # TODO: fill in "frontal" with the electrode names you choose.
@@ -54,15 +54,13 @@ def main():
     print(f"data: {X.shape}, subjects={len(np.unique(groups))}, "
           f"class balance={np.bincount(y)}")
 
-    # Per-channel z-scoring.
-    mean = X.mean(axis=(0, 2), keepdims=True)
-    std = X.std(axis=(0, 2), keepdims=True) + 1e-6
-    X = ((X - mean) / std).astype(np.float32)
-
     # Split people, not trials. Subjects 9–10 are the prescribed held-out test.
     tr, va, te = split_subjects(groups, args.seed)
     for name, ix in [("train", tr), ("val", va), ("test", te)]:
         print(f"{name} subjects: {np.unique(groups[ix]).tolist()}, trials={len(ix)}")
+
+    # Fit preprocessing only after splitting; validation and test never fit it.
+    X, mean, std = standardize_from_train(X, tr)
 
     n_ch, n_t = X.shape[1], X.shape[2]
     model = EEGNet(n_ch, n_t)

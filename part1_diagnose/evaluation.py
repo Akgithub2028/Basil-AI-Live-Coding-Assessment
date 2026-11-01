@@ -21,3 +21,10 @@ def split_subjects(groups, seed=0):
     va = np.flatnonzero(np.isin(groups, val_subjects))
     tr = np.flatnonzero(~np.isin(groups, np.r_[test_subjects, val_subjects]))
     return tr, va, te
+
+
+def standardize_from_train(X, tr):
+    """Fit channel statistics on training trials only; apply to every split."""
+    mean = X[tr].mean(axis=(0, 2), keepdims=True)
+    std = X[tr].std(axis=(0, 2), keepdims=True) + 1e-6
+    return ((X - mean) / std).astype(np.float32), mean, std
