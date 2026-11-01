@@ -1,0 +1,58 @@
+{
+  "archive": "colab_20261101T083535270691Z.zip",
+  "archive_sha256": "2a173a38d93eb0de182a12438c9b0169150446ea701bbdc2e7bc698a9f42afc6",
+  "zip_integrity": "passed",
+  "run_status": "complete",
+  "sources": {
+    "models.py": {
+      "sha256": "aed373929f3e8555e5644d527736bcb553f716b7cba8684c0cc5845d3e657f8b",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "data.py": {
+      "sha256": "73a46f52351c570ecaed9a2a2d30d2df95f94c8e71aa5a0db06e4cd94fe24b27",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "train.py": {
+      "sha256": "db520db52af299966a427d4a9d22a452d78b3fe01a80e02a0eeb36b56d652c68",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "colab_audit.py": {
+      "sha256": "69736e7dd79e2c7295163667b35486dd88735cbf6ea416225430753329a878a9",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "colab_report.py": {
+      "sha256": "c21292d5203d611fd4fa042b365b8814c97e2361798532eb35ffda725b864256",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "prepare_data.py": {
+      "sha256": "42df02ea9fdb9e05bf22bac4d5fcfe90dd6eca35618229f7624423d4808f4218",
+      "recorded_in_run_metadata": true,
+      "provenance": "Exact recorded source"
+    },
+    "audit_baselines.py": {
+      "sha256": "c589f226def46458e168c8d266e5ab8b29f86331a44639f4e601cde530c2fe17",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "requirements-colab.txt": {
+      "sha256": "b21cd5bef5f98e707b7ce98f173564821fa69c4eb6ecab6d2105ccef1a314446",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "Part2_Colab_Audit.ipynb": {
+      "sha256": "956539e3a597190527009e498c495f554f5063e4f589a5e08f7cedcbc8d29fa0",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    },
+    "COLAB.md": {
+      "sha256": "2a6bea4152d93ac9bc1b06f92741241e232fe043ab510a0e21f4347c02fb2237",
+      "recorded_in_run_metadata": false,
+      "provenance": "Supporting dependency/notebook from workspace; not hashed in original run metadata"
+    }
+  }
+}

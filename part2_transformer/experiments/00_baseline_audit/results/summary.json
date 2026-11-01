@@ -1,0 +1,20 @@
+{
+  "eegnet_part1_config": {
+    "best": 0.6,
+    "worst": 0.5444444444444444,
+    "mean": 0.5703703703703703,
+    "std": 0.022831162973959183,
+    "mean_train_accuracy": 0.8314814814814815,
+    "mean_train_seconds": 7.861139326333311,
+    "mean_test_inference_seconds": 0.008138627666691415
+  },
+  "vanilla_transformer": {
+    "best": 0.5444444444444444,
+    "worst": 0.4444444444444444,
+    "mean": 0.5074074074074074,
+    "std": 0.04475202212442434,
+    "mean_train_accuracy": 0.9907407407407408,
+    "mean_train_seconds": 28.46458898233334,
+    "mean_test_inference_seconds": 0.043122340333335764
+  }
+}

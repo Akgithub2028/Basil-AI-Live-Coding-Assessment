@@ -1,0 +1,40 @@
+{
+  "train_shape": [
+    360,
+    64,
+    481
+  ],
+  "test_shape": [
+    90,
+    64,
+    481
+  ],
+  "train_class_counts": [
+    178,
+    182
+  ],
+  "test_class_counts": [
+    46,
+    44
+  ],
+  "per_subject_trials": {
+    "1": 45,
+    "2": 45,
+    "3": 45,
+    "4": 45,
+    "5": 45,
+    "6": 45,
+    "7": 45,
+    "8": 45,
+    "9": 45,
+    "10": 45
+  },
+  "array_bytes": 55411200,
+  "normalized_train_channel_std_range": [
+    0.8860835433006287,
+    0.9522490501403809
+  ],
+  "normalization_note": "Starter adds 1e-6 to std in volts, so channel std is below one; preserved for this audit.",
+  "raw_bytes": 77040000,
+  "seconds": 8.875296384999956
+}

@@ -1,0 +1,3 @@
+# Local feasibility runs and synthetic checks are not measured GPU experiments.
+artifacts/local_checks/
+dataset.zip.tmp

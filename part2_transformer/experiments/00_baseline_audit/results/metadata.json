@@ -1,0 +1,149 @@
+{
+  "status": "complete",
+  "arguments": {
+    "device": "cuda",
+    "precision": "fp16",
+    "epochs": 40,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "batch": 64,
+    "microbatch": 16,
+    "threads": 2,
+    "sync_dir": "/content/drive/MyDrive/Basil AI Intern OA/part2_transformer/artifacts/colab_gpu",
+    "strict_determinism": true,
+    "verify_repeat": true,
+    "smoke": false
+  },
+  "device": "cuda",
+  "gpu": "Tesla T4",
+  "compute_capability": [
+    7,
+    5
+  ],
+  "cuda": "13.0",
+  "cudnn": 92700,
+  "python": "3.13.16",
+  "packages": {
+    "torch": "2.11.0+cu130",
+    "mne": "1.13.2",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3",
+    "scikit-learn": "1.6.1",
+    "matplotlib": "3.10.0"
+  },
+  "models": [
+    "eegnet_part1_config",
+    "vanilla_transformer"
+  ],
+  "train_subjects": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "test_subjects": [
+    9,
+    10
+  ],
+  "evaluation_precision": "fp32",
+  "normalization": "Part 2 starter: training-only channel statistics, epsilon=1e-6 V",
+  "reproducibility": "Strict deterministic kernels by default; same stack/device required for bitwise repeats.",
+  "attention_backend": "Deterministic math SDPA",
+  "cublas_workspace_config": ":4096:8",
+  "eegnet_training_microbatch": 64,
+  "transformer_training_microbatch": 16,
+  "source_sha256": {
+    "models.py": "aed373929f3e8555e5644d527736bcb553f716b7cba8684c0cc5845d3e657f8b",
+    "data.py": "73a46f52351c570ecaed9a2a2d30d2df95f94c8e71aa5a0db06e4cd94fe24b27",
+    "train.py": "db520db52af299966a427d4a9d22a452d78b3fe01a80e02a0eeb36b56d652c68",
+    "colab_audit.py": "69736e7dd79e2c7295163667b35486dd88735cbf6ea416225430753329a878a9",
+    "colab_report.py": "c21292d5203d611fd4fa042b365b8814c97e2361798532eb35ffda725b864256",
+    "prepare_data.py": "42df02ea9fdb9e05bf22bac4d5fcfe90dd6eca35618229f7624423d4808f4218"
+  },
+  "architectures": {
+    "eegnet_part1_config": {
+      "parameters": 2738,
+      "config": {
+        "kern": 80,
+        "p": 0.5
+      },
+      "trace_batch2": {
+        "block1": [
+          2,
+          8,
+          64,
+          482
+        ],
+        "block2": [
+          2,
+          16,
+          1,
+          120
+        ],
+        "block3": [
+          2,
+          16,
+          1,
+          15
+        ],
+        "head": [
+          2,
+          2
+        ]
+      },
+      "module_parameters": {
+        "block1": 656,
+        "block2": 1056,
+        "block3": 544,
+        "head": 482
+      },
+      "architecture": "EEGNet(\n  (block1): Sequential(\n    (0): Conv2d(1, 8, kernel_size=(1, 80), stride=(1, 1), padding=(0, 40), bias=False)\n    (1): BatchNorm2d(8, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n  )\n  (block2): Sequential(\n    (0): Conv2d(8, 16, kernel_size=(64, 1), stride=(1, 1), groups=8, bias=False)\n    (1): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    (2): ELU(alpha=1.0)\n    (3): AvgPool2d(kernel_size=(1, 4), stride=(1, 4), padding=0)\n    (4): Dropout(p=0.5, inplace=False)\n  )\n  (block3): Sequential(\n    (0): Conv2d(16, 16, kernel_size=(1, 16), stride=(1, 1), padding=(0, 8), groups=16, bias=False)\n    (1): Conv2d(16, 16, kernel_size=(1, 1), stride=(1, 1), bias=False)\n    (2): BatchNorm2d(16, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)\n    (3): ELU(alpha=1.0)\n    (4): AvgPool2d(kernel_size=(1, 8), stride=(1, 8), padding=0)\n    (5): Dropout(p=0.5, inplace=False)\n  )\n  (head): Linear(in_features=240, out_features=2, bias=True)\n)"
+    },
+    "vanilla_transformer": {
+      "parameters": 135746,
+      "config": {},
+      "trace_batch2": {
+        "proj": [
+          2,
+          481,
+          64
+        ],
+        "encoder": [
+          2,
+          482,
+          64
+        ],
+        "norm": [
+          2,
+          64
+        ],
+        "head": [
+          2,
+          2
+        ]
+      },
+      "module_parameters": {
+        "proj": 4160,
+        "encoder": 100416,
+        "norm": 128,
+        "head": 130
+      },
+      "architecture": "VanillaEEGTransformer(\n  (proj): Linear(in_features=64, out_features=64, bias=True)\n  (encoder): TransformerEncoder(\n    (layers): ModuleList(\n      (0-2): 3 x TransformerEncoderLayer(\n        (self_attn): MultiheadAttention(\n          (out_proj): NonDynamicallyQuantizableLinear(in_features=64, out_features=64, bias=True)\n        )\n        (linear1): Linear(in_features=64, out_features=128, bias=True)\n        (dropout): Dropout(p=0.3, inplace=False)\n        (linear2): Linear(in_features=128, out_features=64, bias=True)\n        (norm1): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (norm2): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n        (dropout1): Dropout(p=0.3, inplace=False)\n        (dropout2): Dropout(p=0.3, inplace=False)\n      )\n    )\n  )\n  (norm): LayerNorm((64,), eps=1e-05, elementwise_affine=True)\n  (head): Linear(in_features=64, out_features=2, bias=True)\n)",
+      "tokens": 482,
+      "heads": 4,
+      "layers": 3,
+      "head_dim": 16,
+      "attention_entries_per_head": 232324,
+      "attention_entries_batch64_all_heads_one_layer": 59474944,
+      "conceptual_attention_float32_MiB_per_layer": 226.87890625,
+      "attention_QK_AV_MACs_per_trial_all_layers": 89212416
+    }
+  }
+}

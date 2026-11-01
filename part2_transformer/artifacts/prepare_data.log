@@ -1,0 +1,70 @@
+verified S001/S001R06.edf
+verified S001/S001R10.edf
+verified S001/S001R14.edf
+verified S002/S002R06.edf
+verified S002/S002R10.edf
+verified S002/S002R14.edf
+verified S003/S003R06.edf
+verified S003/S003R10.edf
+verified S003/S003R14.edf
+verified S004/S004R06.edf
+verified S004/S004R10.edf
+verified S004/S004R14.edf
+verified S005/S005R06.edf
+verified S005/S005R10.edf
+verified S005/S005R14.edf
+verified S006/S006R06.edf
+verified S006/S006R10.edf
+verified S006/S006R14.edf
+verified S007/S007R06.edf
+verified S007/S007R10.edf
+verified S007/S007R14.edf
+verified S008/S008R06.edf
+verified S008/S008R10.edf
+verified S008/S008R14.edf
+verified S009/S009R06.edf
+verified S009/S009R10.edf
+verified S009/S009R14.edf
+verified S010/S010R06.edf
+verified S010/S010R10.edf
+verified S010/S010R14.edf
+{
+  "train_shape": [
+    360,
+    64,
+    481
+  ],
+  "test_shape": [
+    90,
+    64,
+    481
+  ],
+  "train_class_counts": [
+    178,
+    182
+  ],
+  "test_class_counts": [
+    46,
+    44
+  ],
+  "per_subject_trials": {
+    "1": 45,
+    "2": 45,
+    "3": 45,
+    "4": 45,
+    "5": 45,
+    "6": 45,
+    "7": 45,
+    "8": 45,
+    "9": 45,
+    "10": 45
+  },
+  "array_bytes": 55411200,
+  "normalized_train_channel_std_range": [
+    0.8860835433006287,
+    0.9522490501403809
+  ],
+  "normalization_note": "Starter adds 1e-6 to std in volts, so channel std is below one; preserved for this audit.",
+  "raw_bytes": 77040000,
+  "seconds": 5.522414117000153
+}

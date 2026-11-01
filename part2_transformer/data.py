@@ -15,12 +15,19 @@ A spatial prior that only encodes left vs right will not help here.
 
 The first call downloads ~50 MB to the MNE data dir and caches it.
 """
+from pathlib import Path
+
 import numpy as np
 import mne
 from mne.datasets import eegbci
 from mne.io import concatenate_raws, read_raw_edf
 
 mne.set_log_level("ERROR")
+
+# Explicit path keeps downloads inside Part 2 and avoids changing MNE's global
+# configuration. The loader works from any current working directory.
+DATA_DIR = Path(__file__).resolve().parent / ".cache" / "mne"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 RUNS = [6, 10, 14]                       # imagined: both fists vs both feet
 TRAIN_SUBJECTS = [1, 2, 3, 4, 5, 6, 7, 8]
@@ -33,7 +40,8 @@ L_FREQ, H_FREQ = 7.0, 30.0               # mu + beta
 def _load_subjects(subjects):
     raws = []
     for s in subjects:
-        fnames = eegbci.load_data(s, RUNS, verbose="ERROR")
+        fnames = eegbci.load_data(s, RUNS, path=str(DATA_DIR),
+                                 update_path=False, verbose="ERROR")
         raws.append(concatenate_raws(
             [read_raw_edf(f, preload=True, verbose="ERROR") for f in fnames]))
     raw = concatenate_raws(raws)
@@ -59,7 +67,8 @@ def get_channel_positions():
 
     Handy if your idea uses electrode geometry as a structural/positional prior.
     """
-    fnames = eegbci.load_data(1, RUNS[:1], verbose="ERROR")
+    fnames = eegbci.load_data(1, RUNS[:1], path=str(DATA_DIR),
+                             update_path=False, verbose="ERROR")
     raw = concatenate_raws(
         [read_raw_edf(f, preload=True, verbose="ERROR") for f in fnames])
     raw.rename_channels(lambda c: c.strip("."))

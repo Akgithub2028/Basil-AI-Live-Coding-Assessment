@@ -1,0 +1,8 @@
+{
+  "model": "vanilla_transformer",
+  "seed": 0,
+  "weights_exact": true,
+  "predictions_exact": true,
+  "training_history_exact": true,
+  "extra_training_seconds": 27.957790200999966
+}

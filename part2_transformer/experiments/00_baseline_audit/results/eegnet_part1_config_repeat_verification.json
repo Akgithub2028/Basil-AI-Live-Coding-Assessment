@@ -1,0 +1,8 @@
+{
+  "model": "eegnet_part1_config",
+  "seed": 0,
+  "weights_exact": true,
+  "predictions_exact": true,
+  "training_history_exact": true,
+  "extra_training_seconds": 7.080610370000045
+}
