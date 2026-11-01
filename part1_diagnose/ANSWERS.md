@@ -3,7 +3,8 @@
 ## Part 1 — Task 1: diagnose and correct
 
 Part 1 Tasks 1–4 are complete and were run on CPU, using all ten prescribed
-subjects. Part 2 is unchanged. All three training runs used seed 0, 30 epochs
+subjects. Part 2 is documented separately in `../part2_transformer/ANSWERS.md`.
+All three training runs used seed 0, 30 epochs
 and two CPU threads; the observed scores are reported without further tuning.
 
 ### Original baseline

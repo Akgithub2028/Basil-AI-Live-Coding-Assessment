@@ -1,0 +1,24 @@
+{
+  "status": "passed",
+  "part1_offline_tests": 9,
+  "part1_successful_stages": 4,
+  "part2_final_records": 20,
+  "executed_notebooks_preserved": {
+    "Part2_Colab_Audit.ipynb": {
+      "sha256": "d975c3e0b28319efef3ebbe7a742d77497006bfcdd138ed2f63bc6cd23c7d9dd",
+      "executed_cells": 7,
+      "output_items": 11
+    },
+    "Part2_Controlled_Experiment.ipynb": {
+      "sha256": "aff7771978553bf8f2891302c573ce9aa4f94ff19b3037e41d59f1010dd7d5be",
+      "executed_cells": 8,
+      "output_items": 16
+    }
+  },
+  "archive_integrity_and_recorded_sources": "passed",
+  "submission_artifacts_match_original_run": true,
+  "python_notebook_syntax": "passed",
+  "markdown_links": "passed",
+  "part2_exact_repeat_checks_in_imported_study": 8,
+  "new_training_performed_during_finalization": false
+}

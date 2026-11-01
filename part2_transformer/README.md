@@ -1,74 +1,89 @@
-# EEG Transformer Sprint — Starter Kit
+# Part 2 — Build & Defend
 
-You have 90 minutes. This kit removes all the plumbing so you spend the time on
-one thing: **giving self-attention a fighting chance on tiny EEG data, and
-understanding why your idea does (or doesn't) help.**
+Part 2 now contains a completed baseline audit and a controlled temporal-tokenization
+experiment. The latter produced mixed evidence: lower cost and modestly higher mean
+balanced accuracy than vanilla, but no final-stage stability improvement.
 
-## Setup (first ~10 minutes)
+## Read the measured results
+
+- [Experiment history](experiments/README.md): both original ZIPs, readable results,
+  source snapshots and checksums.
+- [Experiment 00: baseline audit](experiments/00_baseline_audit/README.md).
+- [Experiment 01: shared local temporal tokens](experiments/01_shared_temporal_tokens/README.md).
+- [Part 2 answers](ANSWERS.md): hypothesis, implementation, measured outcome and figure.
+- [Hypothesis and locked protocol](EXPERIMENT_PLAN.md), written before implementation.
+
+The final five-seed comparison trains subjects 1–8 and tests 9–10. Local-token mean
+accuracy is 54.00% (best 62.22%, worst 47.78%), versus 50.44% for vanilla and 54.67%
+for EEGNet with Part 1 settings. Our model is still strongly overfit. See the full
+record for balanced accuracy, seed variability, controls and limitations.
+
+## Reproduce the completed study
+
+Open [Part2_Controlled_Experiment.ipynb](Part2_Controlled_Experiment.ipynb) in Colab,
+select T4 GPU and set the direct Part 2 Drive folder path. It reproduces the original
+fixed study, including its development split, final split, five seeds and exact
+repeat checks. Full instructions: [CONTROLLED_EXPERIMENT.md](CONTROLLED_EXPERIMENT.md).
+The baseline-only notebook is [Part2_Colab_Audit.ipynb](Part2_Colab_Audit.ipynb).
+
+From this directory with dependencies installed:
 
 ```bash
-pip install -r requirements.txt
-python data.py      # sanity check: downloads ~50 MB, prints array shapes
-python main.py      # runs both baselines + the starter YourModel + saves figure.png
+python main.py
 ```
 
-Everything runs on CPU in well under a minute per model. The first run
-downloads the PhysioNet EEGBCI data and caches it.
+This prepares/checks data and runs the completed study using CUDA when available,
+otherwise CPU. It prints every seed and saves results under timestamped
+`artifacts/study_*/` folders. No test score selects an epoch or a winning seed.
+The full study is much slower on a laptop CPU; measured Colab T4 times are in
+[Experiment 01](experiments/01_shared_temporal_tokens/README.md).
 
-## The task
+For a synthetic pipeline check with the existing repository environment:
 
-**Both fists vs. both feet** (imagined movement), cross-subject: train on
-subjects 1–8, test on held-out subjects 9–10.
+```bash
+../.venv/bin/python -B main.py --device cpu --smoke
+```
 
-This is a **bilateral** task. The discriminative signal is largely
-anterior–posterior (hand/arm motor area vs. the medial foot representation near
-the vertex, ~Cz), **not** the classic left/right lateralised mu/beta ERD. A
-spatial prior that only encodes left vs. right will not help you here.
+Synthetic outputs are not real EEG measurements. The baseline definitions in
+`models.py` have not been modified. `main.py` exports `YourModel` from
+`experiment_models.py` and delegates the measured protocol to `experiment.py`.
 
-## What's in the box
+## Files and data
 
-| File | What it is |
-|------|------------|
-| `data.py` | Loader: download, 7–30 Hz filter, epoch, cross-subject split, per-channel z-score (train stats only). Also `get_channel_positions()` for 3D electrode coordinates. |
-| `models.py` | `EEGNet` (conv-prior baseline) and `VanillaEEGTransformer` (per-timestep tokens, **no** EEG prior — the thing to beat/understand). |
-| `train.py` | Shared train/eval loop, seed control, data loaders. |
-| `main.py` | Entry point. Runs the baselines, runs **your** model across seeds, reports best + worst, saves `figure.png`. |
+| Location | Purpose |
+| --- | --- |
+| `models.py` | Original EEGNet and vanilla transformer |
+| `experiment_models.py` | Shared temporal stem and matched scattered-time control |
+| `experiment.py`, `experiment_report.py` | Locked training, evaluation and reports |
+| `data.py`, `prepare_data.py` | Loader and checksum-verified data preparation |
+| `colab_audit.py`, `colab_report.py` | Original two-model GPU audit |
+| `dataset.zip` (optional) | Generate with `bundle_data.py`; otherwise MNE downloads the 30 recordings |
+| `experiments/` | Original immutable results, readable extracts and provenance |
+| `artifacts/` | Data manifests and working outputs |
+| `.cache/` | Downloaded data, arrays and local caches; ignored by Git |
 
-## Your job — in `main.py`
+Upload this folder's Python files, notebooks, Markdown, requirements and
+an optional `dataset.zip` to Drive; without it the notebook downloads the data. Colab keeps its existing CUDA-enabled PyTorch; do not
+upload the laptop `.venv/`. Training uses local runtime storage and backs results
+up to Drive. Strict determinism and actual repeated-seed checks are documented
+in [COLAB.md](COLAB.md).
 
-Implement **one** inductive bias in `YourModel` (or replace it entirely). The
-starter version already shows one legal example: learned **temporal patch**
-tokens instead of per-timestep tokens, which shrinks the O(T²) attention
-surface. Swap in your own bet.
+## Interpretation and status
 
-Do **not** quietly edit the vanilla transformer in `models.py` — the whole point
-is the contrast between "attention with no help" and "attention with your one
-idea."
+This is bilateral fists versus feet, so no left/right-only spatial prior is
+imposed. Accuracy is measured and interpreted, but the assessment does not score
+peak accuracy. The temporal-prior study is exploratory because earlier baseline
+test results had already been inspected; two test subjects and five seeds do not
+support population-level claims. Filtering and subject separation do not prove
+that visual/ocular confounding has been removed.
 
-## What to hand in
+The submission is finalized with these two completed experiments. No additional
+model or test-set-driven search is planned. The readable submission copies are
+[figure.png](figure.png), [results.jsonl](results.jsonl) and [summary.json](summary.json);
+the originals and all development-stage records remain in `experiments/`.
+Reproduction creates a fresh timestamped output directory and does not silently
+replace these recorded submission copies.
 
-- This repo with your `YourModel` filled in. `python main.py` must reproduce
-  your numbers end to end, seed printed.
-- A short note (half a page — edit the section below is fine) with:
-  1. **Hypothesis** — one line, written *before* you coded it.
-  2. **What you changed and why** it targets a real weakness of attention on EEG.
-  3. **What happened** — best *and* worst run across seeds, no cherry-picking.
-  4. One sentence on what `figure.png` shows.
-- A live code walkthrough at the end: share your screen, walk us through the
-  file, answer questions.
-
-Accuracy is **not** scored. We're reading your code and your answers for how you
-reason about EEG and attention under a clock. A clear negative result beats a
-lucky spike you can't explain.
-
----
-
-## Your write-up (fill this in)
-
-**Hypothesis:**
-
-**What I changed and why:**
-
-**Results (best / worst / mean across seeds):**
-
-**Figure:**
+The original assessment README is preserved in [docs/STARTER_README.md](docs/STARTER_README.md).
+Earlier architectural notes remain in [BASELINE_AUDIT.md](BASELINE_AUDIT.md) and
+[AUDIT_INTERPRETATION.md](AUDIT_INTERPRETATION.md).
