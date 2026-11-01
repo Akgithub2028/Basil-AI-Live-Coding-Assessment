@@ -48,6 +48,19 @@ class EvaluationTests(unittest.TestCase):
 
 
 class SignalTests(unittest.TestCase):
+    def test_valid_crop_at_recording_end_is_not_dropped(self):
+        info = mne.create_info(["C3"], 160, "eeg")
+        raw = mne.io.RawArray(np.zeros((1, 30 * 160)), info, verbose="error")
+        raw.set_annotations(mne.Annotations([3, 25], [4, 4], ["T1", "T2"]))
+        events = data.get_events(raw)
+        old = mne.Epochs(raw, events, data.EVENT_ID, -2, 5, baseline=None,
+                         preload=True, verbose="error")
+        self.assertEqual(len(old), 1)  # unused tail runs past the recording
+        with patch.object(data, "load_raw", return_value=raw):
+            X, y, _ = data.epoch_subject(1)
+        self.assertEqual(len(X), 2)
+        np.testing.assert_array_equal(y, [0, 1])
+
     def test_annotation_labels_stay_aligned_after_crop(self):
         info = mne.create_info(["C3", "Cz", "C4"], 160, "eeg")
         raw = mne.io.RawArray(

@@ -32,11 +32,12 @@ Full records: `results.jsonl`; per-run logs: `artifacts/part1/attempts/`.
 
 ### Defect accounting
 
-The PDF states six defects but supplies no answer key. The audit identifies
-five unambiguous implementation/protocol errors plus cue-onset inclusion as
-the sixth scientific correction. The latter reduces an acknowledged confound;
-it is not proof that all remaining features are motor imagery. We do not count
-the intentionally empty frontal group (Task 3) as a silent planted defect.
+The six demonstrated defects are: wrong runs, unnecessarily long epochs,
+post-cue ERD baseline, trial-level splitting, all-data normalization, and
+test-based checkpoint selection. Cue-onset exclusion is an additional
+confound-reduction choice, documented separately rather than counted as a
+planted defect. We do not count the intentionally empty frontal group (Task 3)
+as a silent planted defect.
 
 ### Fix 1 — actual movement loaded as imagery (`data.py`)
 
@@ -48,7 +49,20 @@ actual movement, muscle activity and stronger movement-related signals; the
 direction of the measured accuracy change is not guaranteed. Fix: select
 6/10/14 without changing the T1/T2 hands/feet label mapping.
 
-### Fix 2 — cue-onset activity included in the decoding window (`data.py`)
+### Fix 2 — unused epoch tail discards valid trials (`data.py`)
+
+Wrong: `Epochs` rejected the full −2 to +5 s interval before cropping it to the
+network's shorter window. The unused fifth second can cross a run boundary
+or the end of the recording even when the entire requested crop is available.
+
+Effect: unnecessary, potentially condition-dependent trial loss reduces sample
+size and can change class balance/accuracy in either direction. In the cached
+original S001 runs there are 45 events: −2..5 s keeps 42, rejecting the final
+trial of each run (two `BAD boundary`, one `TOO_SHORT`); −2..4 s keeps all 45.
+Fix: end the shared epoch at +4 s, retaining pre-cue samples for ERD without
+requiring an unused fifth second. This also avoids the same loss in ERD.
+
+### Additional control — exclude cue-onset activity (`data.py`)
 
 Wrong: the original 0–4 s crop includes the immediate response to a visual cue
 whose position predicts the class. This weakens an interpretation as decoding

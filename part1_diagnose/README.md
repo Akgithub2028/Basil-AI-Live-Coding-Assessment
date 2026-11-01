@@ -63,5 +63,5 @@ The first local CPU execution attempt could not train because PyTorch was
 unavailable. The CPU dependencies have since been installed and all seven
 offline signal/evaluation/checkpoint checks pass; PhysioNet downloads remain
 blocked by terminal DNS resolution. No measured accuracy or real ERD figure
-is claimed until a full run succeeds. See `ANSWERS.md` for the distinction
-between five unambiguous errors and the additional cue-onset correction.
+is claimed until a full run succeeds. See `ANSWERS.md` for all six demonstrated
+defects plus the additional cue-onset confound control.
