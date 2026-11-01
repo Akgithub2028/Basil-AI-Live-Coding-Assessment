@@ -8,10 +8,10 @@ import json
 import numpy as np
 import torch
 import torch.nn as nn
-from sklearn.model_selection import train_test_split
 
 from data import build_dataset, SUBJECTS
 from model import EEGNet, count_params
+from evaluation import split_subjects
 
 # Electrode groups for the channel-subset run (Task 3).
 # TODO: fill in "frontal" with the electrode names you choose.
@@ -59,11 +59,10 @@ def main():
     std = X.std(axis=(0, 2), keepdims=True) + 1e-6
     X = ((X - mean) / std).astype(np.float32)
 
-    # Subject-independent evaluation: hold out 20% for test, then 20% of the
-    # remainder for validation.
-    idx = np.arange(len(y))
-    tr, te = train_test_split(idx, test_size=0.2, stratify=y, random_state=args.seed)
-    tr, va = train_test_split(tr, test_size=0.2, stratify=y[tr], random_state=args.seed)
+    # Split people, not trials. Subjects 9–10 are the prescribed held-out test.
+    tr, va, te = split_subjects(groups, args.seed)
+    for name, ix in [("train", tr), ("val", va), ("test", te)]:
+        print(f"{name} subjects: {np.unique(groups[ix]).tolist()}, trials={len(ix)}")
 
     n_ch, n_t = X.shape[1], X.shape[2]
     model = EEGNet(n_ch, n_t)

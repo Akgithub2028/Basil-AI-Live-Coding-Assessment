@@ -46,8 +46,6 @@ This is a confound-reduction choice, not a mathematical error or a complete
 ocular-artifact removal method: sustained gaze and zero-phase filter smearing
 can remain. Keep the broadband filter for the later frontal-channel audit.
 
-### Sources and interpretation
-
 ### Fix 3 — ERD uses post-cue activity as rest (`erd.py`)
 
 Wrong: the baseline was 0–0.5 s after the cue although its comment called it
@@ -57,6 +55,20 @@ Effect: normalizing to a task-contaminated reference can attenuate, amplify or
 reverse ERD/ERS; there is no universal direction. It does not change classifier
 accuracy because `train.py` does not use `erd.py`. Fix: reference power to
 −1.5 to −0.5 s pre-cue and reject missing/nonpositive reference power.
+
+### Fix 4 — trial split masquerades as unseen-subject testing (`train.py`)
+
+Wrong: `train_test_split` stratified trials by class and ignored `groups`, so
+the same person's trials could occur in training, validation and testing.
+
+Effect: usually optimistic for unseen-person generalization because a network
+can exploit subject-specific signal patterns; the exact change is not fixed.
+Fix: partition subject IDs first and assign all their trials together. Test
+subjects are always 9–10 for the full dataset; a seeded two-subject validation
+set is drawn from 1–8, leaving six training subjects. No labels select splits.
+This is not an eight-subject training result: validation is held out separately.
+
+### Sources and interpretation
 
 - [MNE's EEGBCI reference example](https://mne.tools/stable/auto_examples/decoding/decoding_csp_eeg.html)
   identifies runs 6, 10 and 14 as hands-versus-feet imagery and explains excluding
