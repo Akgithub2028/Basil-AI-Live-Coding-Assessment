@@ -6,6 +6,7 @@ ERD% = (P(t) - P_baseline) / P_baseline * 100, where P(t) is band power
 Usage: python erd.py --subjects 1 2 3
 """
 import argparse
+import json
 import numpy as np
 import mne
 import matplotlib
@@ -47,10 +48,12 @@ def main():
     args = ap.parse_args()
 
     curves = {c: [] for c in EVENT_ID}
+    trial_counts = {}
     for s in args.subjects:
         raw = load_raw(s)
         events = get_events(raw)
         ep = band_power_epochs(raw, events, BANDS[args.band])
+        trial_counts[str(s)] = {c: len(ep[c]) for c in EVENT_ID}
         for c in EVENT_ID:
             erd, t = erd_percent(ep, c)
             curves[c].append(erd[[ep.ch_names.index(ch) for ch in PICKS]])
@@ -60,10 +63,20 @@ def main():
         for c in EVENT_ID:
             axes[i].plot(t, np.mean(curves[c], axis=0)[i], label=c)
         axes[i].axvline(0, color="k", lw=0.8); axes[i].axhline(0, color="k", lw=0.5)
+        axes[i].axvspan(*BASELINE, color="grey", alpha=0.15)
         axes[i].set_title(f"{ch} {args.band}"); axes[i].set_xlabel("time from cue (s)")
     axes[0].set_ylabel("ERD/ERS (%)"); axes[0].legend()
     fig.tight_layout(); fig.savefig(f"erd_{args.band}.png", dpi=120)
     print(f"saved erd_{args.band}.png")
+    # Quantify the same equally weighted subject curves for the written answer.
+    window = (t >= 1.0) & (t <= 4.0)
+    summary = dict(band=args.band, baseline_s=BASELINE, analysis_window_s=[1, 4],
+                   subjects=args.subjects, trial_counts=trial_counts,
+                   aggregation="mean of within-subject ERD curves; equal subject weights",
+                   mean_erd_pct={ch: {c: float(np.mean(curves[c], axis=0)[i, window].mean())
+                                     for c in EVENT_ID} for i, ch in enumerate(PICKS)})
+    with open(f"erd_{args.band}_summary.json", "w") as f:
+        json.dump(summary, f, indent=2)
 
 
 if __name__ == "__main__":

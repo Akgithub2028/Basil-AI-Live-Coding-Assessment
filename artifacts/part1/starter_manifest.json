@@ -1,0 +1,9 @@
+{
+  "commit": "85b84b8",
+  "sha256": {
+    "data.py": "1511f3196ac39fbc6f7de3a87a7485ea995b58896e9398fb0242bd00be9b8d50",
+    "erd.py": "140927f96fabb9081956d353ae4b9d93a74ef6b669bb2ceeb181e96999b414f6",
+    "model.py": "41efd6df5b2b21c2b44dbfa1ac0c93dea48bd9cfe784a879c85c750f247de76f",
+    "train.py": "f2df852f2a463e9ada4c6a085c4f983fa028edfd6f2215bb1c19db2374863893"
+  }
+}

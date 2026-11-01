@@ -1,0 +1,12 @@
+test_held_out_perturbation_cannot_change_training_preprocessing (test_pipeline.EvaluationTests.test_held_out_perturbation_cannot_change_training_preprocessing) ... ok
+test_partitions_are_complete_and_subject_disjoint (test_pipeline.EvaluationTests.test_partitions_are_complete_and_subject_disjoint) ... ok
+test_too_few_subjects_rejected (test_pipeline.EvaluationTests.test_too_few_subjects_rejected) ... ok
+test_annotation_labels_stay_aligned_after_crop (test_pipeline.SignalTests.test_annotation_labels_stay_aligned_after_crop) ... ok
+test_half_rest_power_is_negative_fifty_percent (test_pipeline.SignalTests.test_half_rest_power_is_negative_fifty_percent) ... ok
+test_zero_reference_power_rejected (test_pipeline.SignalTests.test_zero_reference_power_rejected) ... ok
+test_validation_selects_checkpoint_and_test_is_opened_once (test_pipeline.TrainingTests.test_validation_selects_checkpoint_and_test_is_opened_once) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 3.826s
+
+OK

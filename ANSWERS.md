@@ -2,8 +2,9 @@
 
 ## Part 1 — Task 1: diagnose and correct
 
-Scope: Task 1 only. ERD interpretation, the frontal-channel experiment and
-Tasks 2–4 remain for subsequent work. Part 2 is unchanged.
+Scope: Part 1 Tasks 1–4. Part 2 is unchanged. Numerical experiments and
+data-dependent interpretations are pending a successful run; code preparation
+and analytical short answers do not substitute for measured results.
 
 ### Original baseline
 
@@ -12,8 +13,22 @@ The untouched starter is preserved in commit `85b84b8`. Intended baseline:
 The local attempt failed before loading data because PyTorch is unavailable;
 see `artifacts/part1/original_attempt.log`. Installing the requirements also
 failed because external DNS resolution is unavailable in the terminal.
-**Original accuracy: not measured. Corrected accuracy: not measured.**
+CPU dependencies were subsequently installed and all seven offline checks
+now pass, including checkpoint selection; the recordings still need downloading.
 Missing results must not be interpreted as chance accuracy or zero accuracy.
+
+<!-- PART1_RESULTS_START -->
+Run: seed=0, epochs=30, CPU threads=2.
+
+| Experiment | Accuracy / output |
+| --- | --- |
+| Original starter (invalid protocol) | not measured (run failed) |
+| Corrected all channels | not measured (run failed) |
+| Corrected frontal only | not measured (run failed) |
+| Mu ERD | not generated (run failed) |
+
+Full records: `results.jsonl`; per-run logs: `artifacts/part1/attempts/`.
+<!-- PART1_RESULTS_END -->
 
 ### Defect accounting
 
@@ -97,5 +112,72 @@ Removing this bias does not guarantee a lower score in every individual run.
 - [PhysioNet dataset documentation](https://physionet.org/content/eegmmidb/1.0.0/)
   describes actual versus imagined tasks and class-dependent top/bottom cues.
 
-Changes below have directional explanations, not invented per-fix accuracy
+Changes above have directional explanations, not invented per-fix accuracy
 effects. Several corrections need not monotonically lower accuracy on one seed.
+
+## Part 1 — Task 2: mu ERD
+
+<!-- PART1_ERD_START -->
+**Awaiting real EEG data and `erd_mu.png`; no plot observations are claimed.**
+The comparison will use mu-band power (8–13 Hz) relative to −1.5 to −0.5 s
+pre-cue rest, with equal subject weights. The anatomical expectation is a
+bilateral hand-related decrease near C3/C4 and a foot-related effect nearer Cz,
+rather than a left-versus-right hand contrast. A weak Cz effect would be
+plausible because medial foot sources lie in the interhemispheric fissure,
+their orientation/depth limits scalp sensitivity, and subject variability can
+attenuate the group average; it would not by itself establish a processing bug.
+<!-- PART1_ERD_END -->
+
+## Part 1 — Task 3: frontal-channel control
+
+The prespecified subset is `Fp1, Fpz, Fp2, AF3, AFz, AF4, F7, F3, Fz, F4, F8`.
+Use the same seed, subject partitions, normalization procedure, epoch window,
+training budget and validation criterion for both channel configurations.
+Spatial kernel size and consequently parameter count change with channel count;
+the result is a control experiment, not a perfectly capacity-matched comparison.
+
+<!-- PART1_FRONTAL_START -->
+**Awaiting measured all-channel and frontal-only accuracies; no comparison is claimed.**
+If frontal-only accuracy remains comparable and clearly above an appropriate
+null, it would be consistent with a frontal cue-correlated shortcut, though
+frontal neural activity and volume conduction are alternative explanations.
+Vertical eye movements and gaze shifts toward the top (fists) or bottom (feet)
+target can create electrooculographic (EOG) potentials strongest frontally.
+Lower frontal accuracy would weaken that particular observation, but neither
+result alone proves that the full model exclusively uses motor-cortex activity.
+<!-- PART1_FRONTAL_END -->
+
+## Part 1 — Task 4: short answers
+
+1. **58% of 45 trials:** this is approximately 26/45; a prespecified one-sided
+   exact binomial test against 0.5 gives **p = 0.18565**, so it is not persuasive
+   evidence above chance at 5%. This assumes independent trials and a balanced
+   null; with imbalance, temporal dependence or model selection, use an
+   appropriate within-subject/run restricted permutation test rerunning the
+   whole training/selection procedure.
+2. **Depthwise spatial layer:** for each learned temporal filter, it learns
+   `D` weighted combinations across electrodes—frequency-specific spatial
+   filters analogous in purpose to CSP. These are discriminative scalp weights,
+   not direct cortical source locations or proof that artifacts were excluded.
+3. **Remove the cue shortcut:** use an identical centrally presented visual cue
+   with its imagery instruction delivered through a counterbalanced auditory
+   mapping, and monitor fixation with eye tracking/EOG. This removes the
+   class-dependent top/bottom target and lets us verify that class-dependent
+   gaze is absent instead of assuming cropping removed it.
+
+Statistical calculation: `scipy.stats.binomtest(26, 45, 0.5, alternative="greater")`.
+Sources: [SciPy binomial test](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.binomtest.html),
+[EEGNet paper](https://arxiv.org/abs/1611.08024),
+[MNE ocular-artifact tutorial](https://mne.tools/stable/auto_tutorials/preprocessing/35_artifact_correction_regression.html).
+
+## Baseline to carry into Part 2
+
+EEGNet `F1=8, D=2, F2=16, kern=80, drop=0.5`; continuous 1–40 Hz filtering;
+imagery runs 6/10/14; 1–4 s crops; 64 channels; training-only channel z-scoring;
+AdamW lr=0.001, weight decay=0.001, batch size=64, 30 epochs, seed=0.
+Checkpoint selection uses validation subjects; test subjects 9–10 are opened
+after selection. The original execution-data/trial-split accuracy and corrected
+imagery-data/subject-split accuracy estimate different things, so their numerical
+difference must not be described as a controlled improvement in model quality.
+Part 2 must harmonize its data window, filter, model settings and selection
+protocol with this reference before claiming a fair comparison.

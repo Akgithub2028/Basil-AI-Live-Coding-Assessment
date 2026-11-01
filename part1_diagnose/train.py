@@ -13,11 +13,11 @@ from data import build_dataset, SUBJECTS
 from model import EEGNet, count_params
 from evaluation import split_subjects, standardize_from_train
 
-# Electrode groups for the channel-subset run (Task 3).
-# TODO: fill in "frontal" with the electrode names you choose.
+# Prespecified frontopolar/anterior-frontal/frontal subset for the ocular audit.
 CHANNEL_GROUPS = {
     "all": None,
-    "frontal": [],
+    "frontal": ["Fp1", "Fpz", "Fp2", "AF3", "AFz", "AF4",
+                "F7", "F3", "Fz", "F4", "F8"],
 }
 
 
@@ -93,6 +93,13 @@ def main():
                   train_subjects=np.unique(groups[tr]).tolist(),
                   val_subjects=np.unique(groups[va]).tolist(),
                   test_subjects=np.unique(groups[te]).tolist(),
+                  n_train=len(tr), n_val=len(va), n_channels=n_ch, n_times=n_t,
+                  channel_names=(ch_names if picks is None else picks),
+                  epochs=args.epochs, lr=args.lr, batch_size=args.bs,
+                  n_params=count_params(model),
+                  train_class_counts=np.bincount(y[tr], minlength=2).tolist(),
+                  val_class_counts=np.bincount(y[va], minlength=2).tolist(),
+                  test_class_counts=np.bincount(y[te], minlength=2).tolist(),
                   test_acc=evaluate(model, X[te], y[te]), n_test=len(te))
     print(json.dumps(result))
     with open("results.jsonl", "a") as f:
